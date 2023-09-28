@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"os"
 )
@@ -10,6 +11,7 @@ func main() {
 
 	args := parseArguments()
 	initializeLogging(args.logTimestamps)
+	validateUsage(args)
 	log.Println("Starting")
 }
 
@@ -20,4 +22,20 @@ func initializeLogging(logTimestamps bool) {
 		log.SetFlags(log.Lshortfile)
 	}
 	log.SetOutput(os.Stdout)
+}
+
+func validateUsage(args arguments) {
+	var invalidUsage bool
+
+	/*
+		if len(args.mandatoryStringArgument) == 0 {
+			invalidUsage = true
+			log.Println("Missing mandatory command line argument: -arg")
+		}
+	*/
+
+	if invalidUsage {
+		flag.Usage()
+		os.Exit(2) // Same code used when a flag is provided but not defined
+	}
 }
