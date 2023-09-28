@@ -12,7 +12,20 @@ func main() {
 	args := parseArguments()
 	initializeLogging(args.logTimestamps)
 	validateUsage(args)
-	log.Println("Starting")
+
+	err := run(args)
+	if err != nil {
+		log.Println(err)
+		os.Exit(1)
+	}
+}
+
+func run(args arguments) error {
+	log.Println("Running:", os.Args)
+
+	// TODO: Do something useful here
+
+	return nil
 }
 
 func initializeLogging(logTimestamps bool) {
